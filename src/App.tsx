@@ -4,11 +4,9 @@ import RickAndMortyPage from "./components/RickAndMortyPage";
 
 function App() {
   return (
-    <div>
     <RickAndMortyPage>
-
+    <h1> Rick and morty</h1>
     </RickAndMortyPage>
-    </div>
   );
 }
 

@@ -1,32 +1,65 @@
-import React, {useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import {ICharacter} from "../types/types";
+import {CharacterResponse, ICharacter} from "../types/types";
+import Card from '../components/Card';
+import axios from "axios";
 
-const RickAndMortyPage = () => {
 
-  const [characters, setCharacters] = useState([]);
+interface RickAndMortyPageProps {
+  children: React.ReactNode;
+}
 
-  async function  fetchCharacters() {
+const RickAndMortyPage: FC<RickAndMortyPageProps>
+  = (props: RickAndMortyPageProps) => {
+
+  const [characters, setCharacters] = useState<ICharacter[]>([]);
+
+  useEffect(() => {
+    fetchCharacters();
+  }, [])
+
+  async function fetchCharacters() {
     try {
-      const response = await axios.get<ICharacter>("https://rickandmortyapi.com/api/character")
-      setCharacters(response.data)
+      const response: CharacterResponse = (
+        await axios.get("https://rickandmortyapi.com/api/character")).data;
+      setCharacters(response.results);
     } catch (e) {
       console.log(e)
     }
   }
 
-  return (
-    <CardGallery>
+  console.log(characters[0])
 
-    </CardGallery>
+  const cardList = characters.map((character) =>
+    <Card
+      key={character.id}
+      name={character.name}
+      gender={character.gender}
+      species={character.species}
+      location={character.location}
+      image={character.image}
+      episode={character.episode.length}/>
+  );
+
+  return (
+    <>
+      <CardGallery>{cardList}</CardGallery>
+    </>
   );
 };
 
 export default RickAndMortyPage;
 
-const CardGallery = styled.div `
+const CardGallery = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: 15px;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: repeat(300px);
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
 `

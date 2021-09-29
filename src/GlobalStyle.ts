@@ -23,9 +23,15 @@ export const GlobalStyle = createGlobalStyle`
    * Remove the margin in all browsers.
    */
 
+  @font-face {
+     url('https://fonts.googleapis.com/css2?family=Roboto&display=swap')
+  }
+  
   body {
     margin: 0;
     max-width: 1440px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
   }
 
   /**
