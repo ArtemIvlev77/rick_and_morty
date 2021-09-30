@@ -49,20 +49,24 @@ const CardWrapper = styled.li`
   display: flex;
   flex-direction: column;
   border-radius: 8px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-  transition: .1s linear;
+  box-shadow: 3px 3px 5px rgba(59,178,201, 0.5);
+  transition: .2s ease;
   overflow: hidden;
   
   
   &:hover {
     transform: scale(1.02);
+    box-shadow: 3px 3px 6px rgba(235,244,97, 0.9);
+
   }
   
   & div {
     padding: 10px;
     background-color: #3a3b3c;
     color: white;
+    transition: .2s ease;
   }
+  
 
   & img {
     object-fit: cover;

@@ -84,7 +84,7 @@ export default RickAndMortyPage;
 const CardGallery = styled.ul`
   margin-top: 50px;
   display: grid;
-  grid-gap: 15px;
+  grid-gap: 20px;
   grid-template-columns: 200px 200px 200px;
   grid-template-rows: repeat(300px);
   justify-content: center;
@@ -98,4 +98,5 @@ const CardGallery = styled.ul`
 
 const RicksLogo = styled.img`
   object-fit: cover;
+  margin-bottom: 100px;
 `
