@@ -4,7 +4,8 @@ import {CharacterResponse, ICharacter} from "../types/types";
 import Card from '../components/Card';
 import axios from "axios";
 import Pagination from "./Pagination";
-
+import logo from '../images/Rick_and_Morty.svg'
+import Search from "./Search";
 
 
 interface RickAndMortyPageProps {
@@ -21,22 +22,24 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   const [prevPageUrl, setPrevPageUrl]: string | any = useState("");
 
   const nextPage = () => {
-    setCurrentPageUrl(nextPageUrl)
+    setCurrentPageUrl(nextPageUrl);
+    window.scrollTo(0, 0);
   }
 
   const prevPage = () => {
-    setCurrentPageUrl(prevPageUrl)
+    setCurrentPageUrl(prevPageUrl);
+    window.scrollTo(0, 0);
   }
-  const goToPage = ( num: number) => {
+  const goToPage = (num: number) => {
     setCurrentPageUrl(`https://rickandmortyapi.com/api/character?page=${num}`)
     window.scrollTo(0, 0);
   }
 
   useEffect(() => {
     fetchCharacters();
-  },[currentPageUrl])
+  }, [currentPageUrl])
 
-  const fetchCharacters = async() => {
+  const fetchCharacters = async () => {
     try {
       const response: CharacterResponse = (
         await axios.get(currentPageUrl)).data;
@@ -48,7 +51,6 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
       console.log(e)
     }
   }
-
 
 
   const cardList = characters.map((character) =>
@@ -64,13 +66,15 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
 
   return (
     <>
+      <RicksLogo src={logo} alt="logo"/>
+      <Search />
       <CardGallery>{cardList}</CardGallery>
       <Pagination
         nextPage={nextPageUrl ? nextPage : null}
         prevPage={prevPageUrl ? prevPage : null}
         goToPage={goToPage}
         pages={pages}
-        />
+      />
     </>
   );
 };
@@ -78,6 +82,7 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
 export default RickAndMortyPage;
 
 const CardGallery = styled.ul`
+  margin-top: 50px;
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 200px 200px 200px;
@@ -89,4 +94,8 @@ const CardGallery = styled.ul`
     list-style-type: none;
     padding: 0;
   }
+`
+
+const RicksLogo = styled.img`
+  object-fit: cover;
 `

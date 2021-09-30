@@ -29,23 +29,26 @@ const Pagination: FC<Props> = (props: OwnProps) => {
 export default Pagination;
 
 const Container = styled.ul`
+ margin: 50px 0;
   display: flex;
   justify-content: center;
-  gap: 2px;
+  gap: 5px;
   & button {
-    border-radius: 50%;
     width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
-    background-color: rgb(58,175,199);
+    background-color: #3bb2c9;
     transition: .1s ease-in box-shadow;
+    border: none;
+    border-radius: 10px;
     
     &:hover {
       transform: scale(1.25);
       box-shadow: 0 0 10px rgb(235,244,97);
+      color: rgb(235,244,97);
     }
   }
 `

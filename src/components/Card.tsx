@@ -44,7 +44,7 @@ const Card: FC<CardProps> = ({
 export default Card;
 
 const CardWrapper = styled.li`
-  font-size: 10px;
+  font-size: 12px;
   line-height: 14px;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,8 @@ const CardWrapper = styled.li`
   
   & div {
     padding: 10px;
-    background-color: white;
+    background-color: #3a3b3c;
+    color: white;
   }
 
   & img {

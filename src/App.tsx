@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import RickAndMortyPage from "./components/RickAndMortyPage";
 
 
-function App () {
+const App: FC = () => {
   return (
     <>
     <RickAndMortyPage />
