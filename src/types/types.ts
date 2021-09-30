@@ -8,20 +8,21 @@ interface CardPropsLocation {
 export interface ICharacter {
   id: number
   name: string;
-  gender: string;
+  gender: 'Female' | 'Male' | 'Genderless' | 'unknown';
   species: string;
   location: CardPropsLocation;
   image: string;
   episode: [],
 }
 
-export interface CharacterResponseInfo {
+export interface IPages {
   count: number;
-  next: string;
   pages: number;
+  next: string | null;
+  prev: string | null;
 }
 
 export interface CharacterResponse {
   results: ICharacter[];
-  info: CharacterResponseInfo;
+  info: IPages;
 }

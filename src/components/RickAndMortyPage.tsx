@@ -3,32 +3,53 @@ import styled from 'styled-components';
 import {CharacterResponse, ICharacter} from "../types/types";
 import Card from '../components/Card';
 import axios from "axios";
+import Pagination from "./Pagination";
+
 
 
 interface RickAndMortyPageProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const RickAndMortyPage: FC<RickAndMortyPageProps>
   = (props: RickAndMortyPageProps) => {
 
   const [characters, setCharacters] = useState<ICharacter[]>([]);
+  const [pages, setPages] = useState<number>();
+  const [currentPageUrl, setCurrentPageUrl] = useState("https://rickandmortyapi.com/api/character")
+  const [nextPageUrl, setNextPageUrl]: string | any = useState("");
+  const [prevPageUrl, setPrevPageUrl]: string | any = useState("");
+
+  const nextPage = () => {
+    setCurrentPageUrl(nextPageUrl)
+  }
+
+  const prevPage = () => {
+    setCurrentPageUrl(prevPageUrl)
+  }
+  const goToPage = ( num: number) => {
+    setCurrentPageUrl(`https://rickandmortyapi.com/api/character?page=${num}`)
+    window.scrollTo(0, 0);
+  }
 
   useEffect(() => {
     fetchCharacters();
-  }, [])
+  },[currentPageUrl])
 
-  async function fetchCharacters() {
+  const fetchCharacters = async() => {
     try {
       const response: CharacterResponse = (
-        await axios.get("https://rickandmortyapi.com/api/character")).data;
+        await axios.get(currentPageUrl)).data;
       setCharacters(response.results);
+      setPages(response.info.pages);
+      setNextPageUrl(response.info.next)
+      setPrevPageUrl(response.info.prev)
     } catch (e) {
       console.log(e)
     }
   }
 
-  console.log(characters[0])
+
 
   const cardList = characters.map((character) =>
     <Card
@@ -44,6 +65,12 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   return (
     <>
       <CardGallery>{cardList}</CardGallery>
+      <Pagination
+        nextPage={nextPageUrl ? nextPage : null}
+        prevPage={prevPageUrl ? prevPage : null}
+        goToPage={goToPage}
+        pages={pages}
+        />
     </>
   );
 };

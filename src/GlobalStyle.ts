@@ -28,10 +28,11 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    margin: 0;
+    margin: 0 auto;
     max-width: 1440px;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
+    background-color: #2d2f34;
   }
 
   /**

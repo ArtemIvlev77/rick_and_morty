@@ -60,6 +60,7 @@ const CardWrapper = styled.li`
   
   & div {
     padding: 10px;
+    background-color: white;
   }
 
   & img {
