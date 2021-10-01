@@ -30,7 +30,7 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   //   searchCharacter()
 
 
-  const searchCharacter = async () => {
+  const fetchCharachters = async () => {
     try {
       const res: CharacterResponse = (
         await axios.get(currentPageUrl)).data;
@@ -66,8 +66,8 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   }
 
   useEffect(() => {
-    searchCharacter();
-  }, [searchCharacter])
+    fetchCharachters();
+  }, [fetchCharachters, currentPageUrl])
 
 
   const cardList = filterCharacter.map((character) =>
