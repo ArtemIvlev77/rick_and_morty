@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components';
 
 // type Option = {
@@ -92,37 +92,37 @@ const SearchInput = styled.input`
     border: 1px solid #3bb2c9;
   }
 `
-const SearchLabel = styled.label`
-  position: relative;
-  left: 75px;
-  top: -33px;
-  color: rgb(235, 244, 97);
-  font-size: 12px;
-  transition: .3s ease;
-  z-index: 10;
-  background-color: #2d2f34;
-`
-const SelectGender = styled.select`
-  position: relative;
-  left: -30px;
-  color: #3bb2c9;
-  width: 190px;
-  font-size: 20px;
-  line-height: 24px;
-  background-color: #2d2f34;
-  border: 1px solid rgb(235, 244, 97);
-  border-radius: .5rem;
-  outline: none;
-  padding: 1rem;
-  z-index: 1;
-  transition: .3s ease;
-
-  :focus {
-    color: rgb(235, 244, 97);
-    border: 1px solid #3bb2c9;
-  }
-`
-const SelectStatus = styled(SelectGender)``
+// const SearchLabel = styled.label`
+//   position: relative;
+//   left: 75px;
+//   top: -33px;
+//   color: rgb(235, 244, 97);
+//   font-size: 12px;
+//   transition: .3s ease;
+//   z-index: 10;
+//   background-color: #2d2f34;
+// `
+// const SelectGender = styled.select`
+//   position: relative;
+//   left: -30px;
+//   color: #3bb2c9;
+//   width: 190px;
+//   font-size: 20px;
+//   line-height: 24px;
+//   background-color: #2d2f34;
+//   border: 1px solid rgb(235, 244, 97);
+//   border-radius: .5rem;
+//   outline: none;
+//   padding: 1rem;
+//   z-index: 1;
+//   transition: .3s ease;
+//
+//   :focus {
+//     color: rgb(235, 244, 97);
+//     border: 1px solid #3bb2c9;
+//   }
+// `
+// const SelectStatus = styled(SelectGender)``
 const SearchButton = styled.input`
   margin-left: 20px;
   padding: 19px 30px;
