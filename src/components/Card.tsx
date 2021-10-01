@@ -64,7 +64,7 @@ const CardWrapper = styled.li`
     padding: 10px;
     background-color: #3a3b3c;
     color: white;
-    transition: .2s ease;
+    transition: .1s ease;
   }
   
 

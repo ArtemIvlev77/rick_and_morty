@@ -5,7 +5,7 @@ import Card from '../components/Card';
 import axios from "axios";
 import Pagination from "./Pagination";
 import logo from '../images/Rick_and_Morty.svg'
-import Search from "./Search";
+import {Search} from "./Search";
 
 
 interface RickAndMortyPageProps {
@@ -20,6 +20,36 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   const [currentPageUrl, setCurrentPageUrl] = useState("https://rickandmortyapi.com/api/character")
   const [nextPageUrl, setNextPageUrl]: string | any = useState("");
   const [prevPageUrl, setPrevPageUrl]: string | any = useState("");
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const filterCharacter = characters.filter(character => {
+    return character.name.toLowerCase().includes(searchValue.toLowerCase())
+  })
+  //       return character.name.toLowerCase().includes(searchValue.toLowerCase())
+  //   setCurrentPageUrl(currentPageUrl + `/?name=${searchValue}`)
+  //   searchCharacter()
+
+
+  const searchCharacter = async () => {
+    try {
+      const res: CharacterResponse = (
+        await axios.get(currentPageUrl)).data;
+      setCharacters(res.results);
+      setPages(res.info.pages);
+      setNextPageUrl(res.info.next);
+      setPrevPageUrl(res.info.prev);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  // const handleSubmit = (event) => {
+  //   searchCharacter();
+  // }
+
+  const handleChange = (event) => {
+    setSearchValue((event.target.value));
+  }
 
   const nextPage = () => {
     setCurrentPageUrl(nextPageUrl);
@@ -36,24 +66,11 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   }
 
   useEffect(() => {
-    fetchCharacters();
-  }, [currentPageUrl])
-
-  const fetchCharacters = async () => {
-    try {
-      const response: CharacterResponse = (
-        await axios.get(currentPageUrl)).data;
-      setCharacters(response.results);
-      setPages(response.info.pages);
-      setNextPageUrl(response.info.next)
-      setPrevPageUrl(response.info.prev)
-    } catch (e) {
-      console.log(e)
-    }
-  }
+    searchCharacter();
+  }, [searchCharacter])
 
 
-  const cardList = characters.map((character) =>
+  const cardList = filterCharacter.map((character) =>
     <Card
       key={character.id}
       name={character.name}
@@ -64,10 +81,11 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
       episode={character.episode.length}/>
   );
 
+
   return (
     <>
       <RicksLogo src={logo} alt="logo"/>
-      <Search />
+      <Search value={searchValue} onChange={handleChange}/>
       <CardGallery>{cardList}</CardGallery>
       <Pagination
         nextPage={nextPageUrl ? nextPage : null}

@@ -31,13 +31,8 @@ export interface CharacterFilter {
   name?: string
   type?: string
   species?: string
-  /**
-   * 'Dead' | 'Alive' | 'unknown'
-   */
-  status?: string
-  /**
-   * 'Female' | 'Male' | 'Genderless' | 'unknown'
-   */
-  gender?: string
+  status?: 'Dead' | 'Alive' | 'unknown';
+  gender?: 'Female' | 'Male' | 'Genderless' | 'unknown';
   page?: number
 }
+
