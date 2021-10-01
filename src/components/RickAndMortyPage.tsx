@@ -30,18 +30,7 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   //   searchCharacter()
 
 
-  const fetchCharachters = async () => {
-    try {
-      const res: CharacterResponse = (
-        await axios.get(currentPageUrl)).data;
-      setCharacters(res.results);
-      setPages(res.info.pages);
-      setNextPageUrl(res.info.next);
-      setPrevPageUrl(res.info.prev);
-    } catch (e) {
-      console.log(e)
-    }
-  }
+
 
   // const handleSubmit = (event) => {
   //   searchCharacter();
@@ -66,8 +55,20 @@ const RickAndMortyPage: FC<RickAndMortyPageProps>
   }
 
   useEffect(() => {
-    fetchCharachters();
-  }, [fetchCharachters, currentPageUrl])
+    const fetchCharacters = async () => {
+      try {
+        const res: CharacterResponse = (
+          await axios.get(currentPageUrl)).data;
+        setCharacters(res.results);
+        setPages(res.info.pages);
+        setNextPageUrl(res.info.next);
+        setPrevPageUrl(res.info.prev);
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    fetchCharacters();
+  }, [currentPageUrl])
 
 
   const cardList = filterCharacter.map((character) =>
